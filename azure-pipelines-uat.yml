@@ -1,0 +1,52 @@
+trigger:
+  - uat
+
+variables:
+  - group: UATSecrets
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  # Checkout Repository
+  - checkout: self
+
+  # Install Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "18.x"
+    displayName: Install Node.js
+
+  # Install Salesforce CLI
+  - script: |
+      npm install --global sfdx-cli
+    displayName: Install Salesforce CLI
+
+  # Verify Salesforce CLI
+  - script: |
+      sfdx --version
+    displayName: Verify Salesforce CLI
+
+  # Authenticate UAT Sandbox
+  - script: |
+      sfdx force:auth:jwt:grant \
+        --clientid "$(SF_CLIENT_ID)" \
+        --jwtkeyfile handsonPractise/keys/server.key \
+        --username "$(SF_USERNAME)" \
+        --instanceurl https://test.salesforce.com \
+        --setdefaultusername \
+        --setalias uatSandbox
+    displayName: Authenticate UAT Sandbox
+
+  # Verify Connected Org
+  - script: |
+      sfdx force:org:list
+    displayName: Verify Org's Login
+
+  # Deploy Salesforce Metadata
+  - script: |
+      cd handsonPractise
+      sfdx force:source:deploy \
+        -p force-app \
+        -u uatSandbox
+    displayName: Deploy Metadata

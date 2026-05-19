@@ -1,0 +1,52 @@
+trigger:
+  - main
+
+variables:
+  - group: ProdSecrets
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  # Checkout Repository
+  - checkout: self
+
+  # Install Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "18.x"
+    displayName: Install Node.js
+
+  # Install Salesforce CLI
+  - script: |
+      npm install --global sfdx-cli
+    displayName: Install Salesforce CLI
+
+  # Verify Salesforce CLI
+  - script: |
+      sfdx --version
+    displayName: Verify Salesforce CLI
+
+  # Authenticate Partial Sandbox
+  - script: |
+      sfdx force:auth:jwt:grant \
+        --clientid "$(SF_CLIENT_ID)" \
+        --jwtkeyfile handsonPractise/keys/server.key \
+        --username "$(SF_USERNAME)" \
+        --instanceurl https://test.salesforce.com \
+        --setdefaultusername \
+        --setalias partialProd
+    displayName: Authenticate Partial Sandbox
+
+  # Verify Connected Org
+  - script: |
+      sfdx force:org:list
+    displayName: Verify Org Login
+
+  # Deploy Salesforce Metadata
+  - script: |
+      cd handsonPractise
+      sfdx force:source:deploy \
+        -p force-app \
+        -u partialProd
+    displayName: Deploy Metadata
