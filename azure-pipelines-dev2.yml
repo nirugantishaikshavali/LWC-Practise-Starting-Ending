@@ -2,7 +2,7 @@ trigger:
   - dev
 
 variables:
-  - group: DevSecrets
+  - group: Dev2Secrets
 
 pool:
   vmImage: ubuntu-latest
