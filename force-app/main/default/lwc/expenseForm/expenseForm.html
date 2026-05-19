@@ -1,0 +1,41 @@
+<template>
+    <lightning-card variant="base">
+        <div>
+        <lightning-input 
+          type="text"
+          label="Enter Expense"
+          name="name"
+          value={expenseData.name}
+          placeholder="e.g. Lunch,Fuel,Book"
+          onchange={changeHandler}
+        ></lightning-input>
+
+        <lightning-input 
+          type="number"
+          label="Amount"
+          name="amount"
+          value={expenseData.amount}
+
+          placeholder="Enter amount"
+          onchange={changeHandler}
+        ></lightning-input>
+      </div>
+
+      <div>
+        <lightning-button 
+          label="Reset" 
+          onclick={resetHandler} 
+          class="slds-var-p-around_small"
+        ></lightning-button>
+
+         <lightning-button 
+          label="Add Expense" 
+          onclick={addHandler} 
+          variant="brand"
+          class="slds-var-p-around_small"
+        ></lightning-button>
+
+      </div>
+    </lightning-card>
+    
+</template>

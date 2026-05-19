@@ -1,0 +1,138 @@
+<template>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <div class="slds-col slds-large-size_1-of-3 slds-medium-size_1-of-2 slds-size_1-of-1">
+            <lightning-card  variant="base" title="Add New Task" class="slds-var-p-around_small">
+                <div>
+                    <lightning-input 
+                        type="text"
+                        label="Enter Task"
+                        name="task"
+                        class="input-task"
+                        value={selectedData.task}
+                        onchange={changeHandler}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input 
+                        type="date" 
+                        name="date" 
+                        value={selectedData.date}
+                        label="Set End Date" 
+                        onchange={changeHandler}
+                    ></lightning-input>
+                </div>
+
+                <div class="slds-m-top_medium slds-text-align_right">
+
+                    <lightning-button
+                        label="Reset"
+                        onclick={resetHandler}
+                        class="slds-m-right_small">
+                    </lightning-button>
+
+                    <lightning-button
+                        variant="brand"
+                        label="Add Task"
+                        onclick={addTaskHandler}>
+                    </lightning-button>
+
+                </div>
+            </lightning-card>
+        </div>
+
+
+        <div class="slds-col slds-large-size_1-of-3 slds-medium-size_1-of-2 slds-size_1-of-1">
+             <lightning-card  variant="base" title="To Do List" class="slds-var-p-around_small">
+                <template lwc:if={incompleteTask}>
+                    <template for:each={incompleteTask} for:item="task">
+                            <div
+                                key={task.task}
+                                class="task-container slds-m-bottom_small">
+
+                                <!-- LEFT CONTENT -->
+                                <div>
+
+                                    <div class="task-name">
+                                        {task.task}
+                                    </div>
+
+                                    <div class="task-date">
+                                        {task.date}
+                                    </div>
+
+                                </div>
+
+                                <!-- RIGHT BUTTONS -->
+                                <div>
+
+                                    <!-- Delete -->
+                                    <lightning-button-icon
+                                        icon-name="utility:delete"
+                                        alternative-text="Delete"
+                                        title="Delete"
+                                        data-task={task.task}
+                                        onclick={deleteTaskHandler}>
+                                    </lightning-button-icon>
+
+                                    <!-- Complete -->
+                                    <lightning-button-icon
+                                        icon-name="utility:check"
+                                        alternative-text="Complete"
+                                        title="Complete"
+                                        class="slds-m-left_x-small"
+                                        data-task={task.task}
+                                        onclick={completeTaskHandler}>
+                                    </lightning-button-icon>
+
+                                </div>
+
+                            </div>
+
+                    </template>
+
+                </template>
+            </lightning-card>
+        </div>
+
+
+        <div class="slds-col slds-large-size_1-of-3 slds-medium-size_1-of-2 slds-size_1-of-1">
+             <lightning-card  variant="base" title="Completed Items" class="slds-var-p-around_small">
+
+                <template lwc:if={completeTask}>
+                    <template for:each={completeTask} for:item="task">
+                    <div
+                                key={task.task}
+                                class="task-container2 slds-m-bottom_small">
+
+                                <!-- LEFT CONTENT -->
+                                <div>
+
+                                    <div class="task-name">
+                                        {task.task}
+                                    </div>
+
+                                    <div class="task-date">
+                                        {task.date}
+                                    </div>
+
+                                </div>
+
+                                <!-- RIGHT BUTTONS -->
+                                <div>
+
+                                  
+
+                                </div>
+
+                            </div>
+
+
+                    </template>
+
+                </template>
+              
+            </lightning-card>
+
+        </div>
+    </div>
+</template>

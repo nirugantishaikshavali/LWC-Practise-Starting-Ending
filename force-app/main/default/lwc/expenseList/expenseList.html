@@ -1,0 +1,24 @@
+<template>
+    <div>
+        <template lwc:if={expensive}>
+            <template for:each={expensive} for:item="expense">
+                <div key={expense.name} class="expensives">
+                    <div>
+                        <p>{expense.name}</p>
+                        <p>{expense.amount}</p>
+                    </div>
+                    <div>
+                        <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete"
+                        onclick={deleteHandler} data-name={expense.name}
+                        ></lightning-icon>
+
+                    </div>
+
+                </div>
+
+            </template>
+        </template>
+    </div>
+
+    
+</template>

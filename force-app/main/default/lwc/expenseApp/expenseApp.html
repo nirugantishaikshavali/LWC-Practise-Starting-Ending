@@ -1,0 +1,26 @@
+<template>
+    <div>
+        <div class="slds-grid slds-gutters expensive-app">
+            <div class="slds-col slds-size_2-of-3">
+                    <div class="slds-text-heading_large">Expense Tracker App</div>
+                    </div>
+            <div class="slds-col slds-size_1-of-3">
+                <div>
+                    <p>Total Expense:</p>
+                    <p>${total_expensive}</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="row-container">
+                <c-expense-form  onaddelement={addElementHandler}></c-expense-form>
+                <c-expense-list expensive={expensive}  ondeleteditem={deleteHandler}></c-expense-list>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</template>

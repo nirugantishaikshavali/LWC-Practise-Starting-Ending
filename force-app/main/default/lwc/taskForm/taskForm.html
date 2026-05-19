@@ -1,0 +1,24 @@
+<template>
+
+    <lightning-card title="Task Form">
+
+        <div class="slds-p-around_medium">
+
+           
+            <lightning-input
+                label="Task"
+                name="task"
+                value={task}
+                onchange={changeHandler}>
+            </lightning-input>
+
+            <lightning-button
+                label="Add Task"
+                onclick={addTask}>
+            </lightning-button>
+
+        </div>
+
+    </lightning-card>
+
+</template>

@@ -1,0 +1,14 @@
+<template>
+
+    <!-- FORM -->
+    <c-task-form
+        onaddtask={addTaskHandler}>
+    </c-task-form>
+
+    <!-- TASK LIST -->
+    <c-task-list
+        tasks={incompleteTask}
+        ondelete={deleteTaskHandler}>
+    </c-task-list>
+
+</template>

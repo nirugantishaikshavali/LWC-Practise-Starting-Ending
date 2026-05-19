@@ -1,0 +1,33 @@
+.task-container{
+    background: #f4f1a1;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+        margin: 12px;
+
+    align-items: center;
+
+}
+
+.task-container2{
+    background: #0cc44c;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    margin: 12px;
+    align-items: center;
+    color: white;
+}
+
+.task-name{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.task-date{
+    color: #555;
+    font-size: 13px;
+}
+
