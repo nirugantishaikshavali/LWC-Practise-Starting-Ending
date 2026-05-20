@@ -31,7 +31,7 @@ steps:
   - script: |
       sfdx force:auth:jwt:grant \
         --clientid "$(SF_CLIENT_ID)" \
-        --jwtkeyfile handsonPractise/keys/server.key \
+        --jwtkeyfile keys/server.key \
         --username "$(SF_USERNAME)" \
         --instanceurl https://test.salesforce.com \
         --setdefaultusername \
@@ -45,7 +45,6 @@ steps:
 
   # Deploy Salesforce Metadata
   - script: |
-      cd handsonPractise
       sfdx force:source:deploy \
         -p force-app \
         -u uatSandbox
